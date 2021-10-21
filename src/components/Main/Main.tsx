@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-const Main: React.FC = () => {
+interface Props {
+  width: number;
+  height: number;
+}
+
+const Main: React.FC<Props> = ({ width, height }) => {
   return <h1>asfd</h1>;
 };
 

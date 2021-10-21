@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Main from '../components/Main/Main';
+import { useEffect, useState } from 'react';
 
 // styles
 const pageStyles = {
@@ -10,9 +11,22 @@ const pageStyles = {
 
 // markup
 const IndexPage: React.FC = () => {
+  const [{ width, height }, setSize] = useState<{ width: number; height: number }>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = (e) => {
+      setSize({ width: e.target.innerWidth, height: e.target.innerHeight });
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <main style={pageStyles}>
-      <Main />
+      <Main width={width} height={height} />
     </main>
   );
 };
