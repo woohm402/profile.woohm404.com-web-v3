@@ -1,32 +1,21 @@
 import * as React from 'react';
 import Main from '../components/Main/Main';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { throttle } from 'lodash';
 
-// styles
-const pageStyles = {
-  color: '#232129',
-  padding: 96,
-  fontFamily: '-apple-system, Roboto, sans-serif, serif',
-};
+import '../styles/reset.css';
 
 // markup
 const IndexPage: React.FC = () => {
-  const [{ width, height }, setSize] = useState<{ width: number; height: number }>({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  const [, setScroll] = useState<number>(0);
 
-  useEffect(() => {
-    const handleResize = (e) => {
-      setSize({ width: e.target.innerWidth, height: e.target.innerHeight });
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const handleScroll = throttle(() => {
+    setScroll(Math.random());
+  }, 1000);
 
   return (
-    <main style={pageStyles}>
-      <Main width={width} height={height} />
+    <main onScroll={handleScroll}>
+      <Main />
     </main>
   );
 };

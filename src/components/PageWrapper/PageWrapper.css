@@ -1,0 +1,13 @@
+.wrapper {
+  padding: 30px;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-snap-align: center;
+}
+
+.inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
